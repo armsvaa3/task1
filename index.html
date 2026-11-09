@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Практические работы по JavaScript</title>
+</head>
+<body>
+
+    <!-- ПРАКТИЧЕСКАЯ РАБОТА №1 -->
+    <hr>
+    <h3>ПЗ №1. Регистрация студента</h3>
+    <form id="form1">
+        <input type="text" id="p1_name" placeholder="ФИО" required><br><br>
+        <input type="email" id="p1_email" placeholder="Email" required><br><br>
+        <input type="number" id="p1_age" placeholder="Возраст" min="14" max="100" required><br><br>
+        <input type="text" id="p1_group" placeholder="Учебная группа" required><br><br>
+        <input type="tel" id="p1_phone" placeholder="Телефон" required><br><br>
+        <button type="submit">Зарегистрировать</button>
+    </form>
+    <p id="p1_res"></p>
+
+    <!-- ПРАКТИЧЕСКАЯ РАБОТА №2 -->
+    <hr>
+    <h3>ПЗ №2. Калькулятор стоимости заказа</h3>
+    <form id="form2">
+        <input type="number" id="p2_price" placeholder="Цена за единицу" min="0" required><br><br>
+        <input type="number" id="p2_qty" placeholder="Количество" min="0" required><br><br>
+        <button type="submit">Рассчитать</button>
+    </form>
+    <p id="p2_res"></p>
+
+    <!-- ПРАКТИЧЕСКАЯ РАБОТА №3 -->
+    <hr>
+    <h3>ПЗ №3. Проверка сложности пароля</h3>
+    <div>
+        <input type="password" id="p3_pass" placeholder="Введите пароль">
+        <button type="button" id="p3_toggle">Показать/Скрыть</button>
+        <p>Сложность: <span id="p3_strength"></span></p>
+    </div>
+
+    <!-- ПРАКТИЧЕСКАЯ РАБОТА №4 -->
+    <hr>
+    <h3>ПЗ №4. Выбор учебного курса</h3>
+    <select id="p4_course">
+        <option value="">Выберите дисциплину</option>
+        <option value="js">JavaScript</option>
+        <option value="python">Python</option>
+        <option value="html">HTML и CSS</option>
+        <option value="node">Node.js</option>
+    </select>
+    <p id="p4_res"></p>
+    <button id="p4_btn" style="display:none;">Записаться на курс</button>
+
+    <!-- ПРАКТИЧЕСКАЯ РАБОТА №5 -->
+    <hr>
+    <h3>ПЗ №5. Зависимые выпадающие списки</h3>
+    <select id="p5_spec">
+        <option value="">Выберите специальность</option>
+        <option value="software">Программное обеспечение</option>
+        <option value="networks">Сети и системы связи</option>
+    </select>
+    <select id="p5_group" disabled>
+        <option value="">Выберите группу</option>
+    </select>
+    <select id="p5_student" disabled>
+        <option value="">Выберите студента</option>
+    </select>
+    <p id="p5_res"></p>
+
+    <!-- ПРАКТИЧЕСКАЯ РАБОТА №6 -->
+    <hr>
+    <h3>ПЗ №6. Фильтрация товаров по категориям</h3>
+    <select id="p6_category">
+        <option value="">Все категории</option>
+        <option value="laptops">Ноутбуки</option>
+        <option value="phones">Телефоны</option>
+        <option value="tablets">Планшеты</option>
+    </select>
+    <select id="p6_priceRange">
+        <option value="">Любая цена</option>
+        <option value="low">До 200 000 тенге</option>
+        <option value="mid">200 000 - 400 000 тенге</option>
+        <option value="high">Более 400 000 тенге</option>
+    </select>
+    <div id="p6_catalog"></div>
+
+    <!-- ПРАКТИЧЕСКАЯ РАБОТА №7 -->
+    <hr>
+    <h3>ПЗ №7. Секундомер</h3>
+    <div>
+        <p>Время: <span id="p7_time">00:00</span></p>
+        <button onclick="p7_start()">Старт</button>
+        <button onclick="p7_stop()">Стоп</button>
+        <button onclick="p7_reset()">Сброс</button>
+    </div>
+
+    <!-- ПРАКТИЧЕСКАЯ РАБОТА №8 -->
+    <hr>
+    <h3>ПЗ №8. Обратный отсчёт</h3>
+    <div>
+        <select id="p8_duration">
+            <option value="10">10 секунд</option>
+            <option value="30">30 секунд</option>
+            <option value="60">60 секунд</option>
+        </select><br><br>
+        <p>Осталось: <span id="p8_display">0</span></p>
+        <button onclick="p8_start()">Старт</button>
+        <button onclick="p8_pause()">Пауза</button>
+        <button onclick="p8_reset()">Сброс</button>
+    </div>
+
+    <!-- ПРАКТИЧЕСКАЯ РАБОТА №9 -->
+    <hr>
+    <h3>ПЗ №9. Автоматическое переключение слайдов</h3>
+    <div>
+        <p id="p9_imageBox" style="font-weight:bold;">🖼️ [Слайд 1.jpg]</p>
+        <button onclick="p9_prev()">Назад</button>
+        <span id="p9_indicator">1 / 5</span>
+        <button onclick="p9_next()">Вперед</button>
+    </div>
+
+    <!-- ПРАКТИЧЕСКАЯ РАБОТА №10 -->
+    <hr>
+    <h3>ПЗ №10. Тестирование с ограничением времени</h3>
+    <div>
+        <p>Время до конца теста: <span id="p10_timer">5:00</span></p>
+        <div id="p10_quizBox"></div><br>
+        <button id="p10_submitBtn">Ответить</button>
+    </div>
+
+
+    <!-- СКРИПТЫ ДЛЯ РАБОТЫ ВСЕХ ФОРМ -->
+    <script>
+        // ПЗ 1
+        document.getElementById("form1").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const name = document.getElementById("p1_name").value;
+            const age = document.getElementById("p1_age").value;
+            const group = document.getElementById("p1_group").value;
+            document.getElementById("p1_res").textContent = `Студент ${name}, группа ${group} зарегистрирован. Возраст: ${age}.`;
+        });
+
+        // ПЗ 2
+        document.getElementById("form2").addEventListener("submit", function(e) {
+            e.preventDefault();
+            let price = Number(document.getElementById("p2_price").value);
+            let qty = Number(document.getElementById("p2_qty").value);
+            let total = price * qty;
+            if (total >= 50000) total *= 0.9; // Скидка 10%
+            document.getElementById("p2_res").textContent = `Итоговая стоимость: ${total} тенге`;
+        });
+
+        // ПЗ 3
+        const p3_pass = document.getElementById("p3_pass");
+        document.getElementById("p3_toggle").addEventListener("click", () => {
+            p3_pass.type = p3_pass.type === "password" ? "text" : "password";
+        });
+        p3_pass.addEventListener("input", function() {
+            let val = this.value;
+            let score = 0;
+            if (val.length >= 8) score++;
+            if (/[0-9]/.test(val) && /[a-zA-Z]/.test(val)) score++;
+            if (/[^a-zA-Z0-9]/.test(val)) score++;
+            const levels = ["Слабый", "Средний", "Надёжный"];
+            document.getElementById("p3_strength").textContent = val ? (levels[score - 1] || "Очень слабый") : "";
+        });
+
+        // ПЗ 4
+        const courses = {
+            js: { name: "JavaScript — 72 часа", price: 45000 },
+            python: { name: "Python — 96 часов", price: 60000 },
+            html: { name: "HTML и CSS — 48 часов", price: 30000 },
+            node: { name: "Node.js — 60 часов", price: 50000 }
+        };
+        document.getElementById("p4_course").addEventListener("change", function() {
+            let course = courses[this.value];
+            if (course) {
+                document.getElementById("p4_res").textContent = `${course.name}. Стоимость: ${course.price} тенге.`;
+                document.getElementById("p4_btn").style.display = "block";
+            } else {
+                document.getElementById("p4_res").textContent = "";
+                document.getElementById("p4_btn").style.display = "none";
+            }
+        });
+
+        // ПЗ 5
+        const groupsData = { software: ["РПО-24-1", "РПО-24-2"], networks: ["КС-24-1"] };
+        const studentsData = { "РПО-24-1": ["Алиев А.", "Иванов И."], "РПО-24-2": ["Петров П."], "КС-24-1": ["Козлов К."] };
+        
+        document.getElementById("p5_spec").addEventListener("change", function() {
+            let spec = this.value;
+            let gSelect = document.getElementById("p5_group");
+            gSelect.innerHTML = '<option value="">Выберите группу</option>';
+            gSelect.disabled = !spec;
+            if (groupsData[spec]) {
+                groupsData[spec].forEach(g => gSelect.innerHTML += `<option value="${g}">${g}</option>`);
+            }
+        });
+        document.getElementById("p5_group").addEventListener("change", function() {
+            let group = this.value;
+            let sSelect = document.getElementById("p5_student");
+            sSelect.innerHTML = '<option value="">Выберите студента</option>';
+            sSelect.disabled = !group;
+            if (studentsData[group]) {
+                studentsData[group].forEach(s => sSelect.innerHTML += `<option value="${s}">${s}</option>`);
+            }
+        });
+
+        // ПЗ 6
+        const products = [
+            { name: "MacBook Pro", category: "laptops", price: 750000 },
+            { name: "iPhone 15", category: "phones", price: 450000 },
+            { name: "iPad Pro", category: "tablets", price: 390000 },
+            { name: "Xiaomi Redmi", category: "phones", price: 110000 }
+        ];
+        function renderP6() {
+            let cat = document.getElementById("p6_category").value;
+            let pRange = document.getElementById("p6_priceRange").value;
+            let filtered = cat ? products.filter(p => p.category === cat) : [...products];
+            if (pRange === "low") filtered = filtered.filter(p => p.price < 200000);
+            if (pRange === "mid") filtered = filtered.filter(p => p.price >= 200000 && p.price <= 400000);
+            if (pRange === "high") filtered = filtered.filter(p => p.price > 400000);
+
+            let html = "";
+            filtered.forEach(p => html += `<div>${p.name} — ${p.price} тенге</div>`);
+            document.getElementById("p6_catalog").innerHTML = html || "Товары не найдены";
+        }
+        document.getElementById("p6_category").addEventListener("change", renderP6);
+        document.getElementById("p6_priceRange").addEventListener("change", renderP6);
+        renderP6();
+
+        // ПЗ 7
+        let p7_sec = 0, p7_t = null;
+        function p7_start() {
+            if (p7_t) return;
+            p7_t = setInterval(() => {
+                p7_sec++;
